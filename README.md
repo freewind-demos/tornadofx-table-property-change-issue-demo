@@ -1,4 +1,6 @@
-Kotlin Hello World Demo
+Kotlin H2 Database Demo
 =======================
 
-Hello world from kotlin. Open it in IDE and run `Hello.kt`
+Create table and query it in H2.
+
+In `Hello.kt` file.
