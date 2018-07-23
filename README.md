@@ -1,6 +1,8 @@
-Kotlin H2 Database Demo
-=======================
+TornadoFX Table Edit Demo
+=========================
 
-Create table and query it in H2.
+Double click on any cell and edit, and press `enter` to commit the new value.
 
-In `Hello.kt` file.
+Run `Hello.kt` file in your IDE.
+
+Compared to [JavaFX](https://github.com/javafx-demos/javafx-editable-table-demo) version, this one is much more simple with TornadoFX api.

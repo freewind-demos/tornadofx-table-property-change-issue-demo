@@ -1,42 +1,49 @@
 package example
 
-import java.sql.DriverManager
+import javafx.beans.property.SimpleIntegerProperty
+import javafx.beans.property.SimpleStringProperty
+import javafx.collections.FXCollections.observableArrayList
+import javafx.scene.control.TableView
+import tornadofx.*
 
-private val DBNAME = "mydb"
+data class User(val id: SimpleIntegerProperty, val name: SimpleStringProperty) {
+    companion object {
+        fun new(id: Int, name: String) = User(id = SimpleIntegerProperty(id), name = SimpleStringProperty(name))
+    }
+}
 
-fun main(args: Array<String>) {
-    Class.forName("org.h2.Driver")
+private val data = observableArrayList<User>(
+        User.new(111, "AAA"),
+        User.new(222, "BBB"),
+        User.new(333, "CCC"),
+        User.new(444, "DDD")
+)
 
-    val conn = DriverManager.getConnection("jdbc:h2:mem:$DBNAME", "sa", "sa") // (2)
+class HelloWorld : View() {
 
-    conn.use {
+    private lateinit var tableView: TableView<User>
 
-        conn.createStatement().use { stmt ->
-            with(stmt) {
-                executeUpdate("create table mytbl(id int primary key, name varchar(255))")
-                executeUpdate("insert into mytbl values(1, 'Hello')")
-                executeUpdate("insert into mytbl values(2, 'World')")
-            }
-        }
-
-        conn.createStatement().use { stmt ->
-            val rs = stmt.executeQuery("select * from mytbl")
-            while (rs.next()) {
-                println("> " + rs.getString("name"))
-            }
+    override val root = vbox {
+        tableview<User>(data) {
+            tableView = this
+            column("id", User::id).makeEditable()
+            column("name", User::name).makeEditable()
         }
     }
 
 }
 
-fun <T : AutoCloseable?, R> T.use(block: (T) -> R): R {
-    try {
-        return block(this)
-    } finally {
-        try {
-            this?.close()
-        } catch (e: Exception) {
-            println(e.toString())
+class HelloWorldStyle : Stylesheet() {
+    init {
+        root {
+            prefWidth = 600.px
+            prefHeight = 400.px
         }
     }
+}
+
+class HelloWorldApp : App(HelloWorld::class, HelloWorldStyle::class)
+
+fun main(args: Array<String>) {
+    launch<HelloWorldApp>()
 }
