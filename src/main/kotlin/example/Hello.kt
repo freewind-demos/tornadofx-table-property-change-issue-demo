@@ -1,36 +1,19 @@
 package example
 
-import javafx.beans.property.SimpleIntegerProperty
-import javafx.beans.property.SimpleStringProperty
-import javafx.collections.FXCollections.observableArrayList
-import javafx.scene.control.TableView
 import tornadofx.*
 
-data class User(val id: SimpleIntegerProperty, val name: SimpleStringProperty) {
-    companion object {
-        fun new(id: Int, name: String) = User(id = SimpleIntegerProperty(id), name = SimpleStringProperty(name))
-    }
-}
+data class User(val id: Int, val name: String)
 
-private val data = observableArrayList<User>(
-        User.new(111, "AAA"),
-        User.new(222, "BBB"),
-        User.new(333, "CCC"),
-        User.new(444, "DDD")
-)
+private val data = listOf(User(111, "AAA"), User(222, "BBB"), User(333, "CCC"), User(444, "DDD")).observable()
 
 class HelloWorld : View() {
 
-    private lateinit var tableView: TableView<User>
-
     override val root = vbox {
-        tableview<User>(data) {
-            tableView = this
-            column("id", User::id).makeEditable()
-            column("name", User::name).makeEditable()
+        tableview(data) {
+            column("id", User::id.getter)
+            column("name", User::name.getter)
         }
     }
-
 }
 
 class HelloWorldStyle : Stylesheet() {
