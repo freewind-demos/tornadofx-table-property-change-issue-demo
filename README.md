@@ -24,6 +24,23 @@ Please run `Hello.kt` file in your IDE, and click the `change` buttons in the wi
 
 A question posted on stackoverflow: <https://stackoverflow.com/questions/51491615/change-the-value-of-a-property-of-some-data-but-tableview-doesnt-update>
 
+Update
+------
+
+Found the reason. For `User2`, we should use:
+
+```
+column("name", User2::nameProperty)
+```
+
+other than
+
+```
+column("name", User2::name)
+```
+
+I think this kind of definition in `User2` is not quite good since there are always two similar properties for one thing (like `name` and `nameProperty`), which makes it easy to write wrong code and hard to find the bug, since the code is compilable and will run correctly in most of cases.
+
 Resources
 ---------
 
