@@ -10,8 +10,8 @@ class HelloWorld : View() {
 
     override val root = vbox {
         tableview(data) {
-            column("id", User::id.getter)
-            column("name", User::name.getter)
+            readonlyColumn("id", User::id)
+            readonlyColumn("name", User::name)
         }
     }
 }
