@@ -20,9 +20,11 @@ class User2(id: Int, name: String) {
 
 But I found the changes to `User2` is not reflected in table.
 
-Please run `Hello.kt` file in your IDE, and click the `change` buttons in the window.
+Please run `Hello.kt` file in your IDE, and click the `change` buttons in the window, you will find the second table is not working well.
+
+A question posted on stackoverflow: <https://stackoverflow.com/questions/51491615/change-the-value-of-a-property-of-some-data-but-tableview-doesnt-update>
 
 Resources
 ---------
 
-- <https://github.com/edvin/tornadofx-guide/blob/master/part1/11.%20Editing%20Models%20and%20Validation.md>
+- Guide: <https://github.com/edvin/tornadofx-guide/blob/master/part1/11.%20Editing%20Models%20and%20Validation.md>
