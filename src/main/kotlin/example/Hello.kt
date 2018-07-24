@@ -1,8 +1,18 @@
+@file:Suppress("MemberVisibilityCanBePrivate")
+
 package example
 
+import javafx.beans.property.SimpleIntegerProperty
+import javafx.beans.property.SimpleStringProperty
 import tornadofx.*
 
-data class User(val id: Int, val name: String)
+class User(id: Int, name: String) {
+    val idProperty = SimpleIntegerProperty(id)
+    var id by idProperty
+
+    val nameProperty = SimpleStringProperty(name)
+    var name by nameProperty
+}
 
 private val data = listOf(User(111, "AAA"), User(222, "BBB"), User(333, "CCC"), User(444, "DDD")).observable()
 
@@ -10,8 +20,8 @@ class HelloWorld : View() {
 
     override val root = vbox {
         tableview(data) {
-            readonlyColumn("id", User::id)
-            readonlyColumn("name", User::name)
+            column("id", User::id)
+            column("name", User::name)
         }
     }
 }

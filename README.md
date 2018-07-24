@@ -1,7 +1,7 @@
-TornadoFX Table Show Pojo Demo
-==============================
+TornadoFX Table Demo
+====================
 
-Show pojo properties in table.
+Show data in table.
 
 Run `Hello.kt` file in your IDE.
 
